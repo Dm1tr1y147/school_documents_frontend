@@ -1,27 +1,28 @@
 #navbar {
     position: fixed;
     bottom: 0;
-    height: 12vh;
+    height: 10vh;
     background-color: rgb(54, 54, 69);
     width: 100%;
     border-radius: 20px 20px 0 0;
-    padding: 2.5vh;
+    padding: 2vh;
     box-sizing: border-box;
     color: #ffffff;
+    z-index: 500;
 }
 
 #navbar nav {
     background-color: rgb(54, 54, 69);
     display: flex;
     gap: 1.5vh;
-    height: 7vh;
+    height: 6vh;
     position: relative;
     z-index: 1000;
 }
 
 #logo {
-    height: 7vh;
-    width: 7vh;
+    height: 6vh;
+    width: 6vh;
     background-color: white;
     border-radius: 100%;
     padding: 1vh;
@@ -34,8 +35,8 @@
 
 .navButton {
     background-color: rgb(255, 109, 109);
-    height: 7vh;
-    width: 7vh;
+    height: 6vh;
+    width: 6vh;
     padding: 1.5vh;
     border-radius: 100%;
     border: none;
@@ -47,20 +48,21 @@
 }
 
 .navButton img {
-    height: 4vh;
-    width: 4vh;
+    height: 3vh;
+    width: 3vh;
 }
 
 #searchInput {
     position: fixed;
-    width: 7vh;
-    bottom: 2.5vh;
-    right: 2.5vh;
-    height: 7vh;
+    width: 6vh;
+    bottom: 2vh;
+    right: 2vh;
+    height: 6vh;
     border: none;
-    border-radius: 100vh;
+    border-radius: 1000px;
     box-sizing: border-box;
     z-index: 500;
+    padding: 0 2vh;
 }
 
 #filters {
@@ -70,20 +72,20 @@
     left: 0;
     width: 100vw;
     box-sizing: border-box;
-    padding: 2.5vh;
+    padding: 2vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     gap: 5vh;
-    padding-top: -12vh;
+    padding-top: -10vh;
     overflow: hidden;
     z-index: 1;
 }
 
 #filters label h2 {
     margin: 1.5vh 0;
-    text-align: center;
+    text-align: left;
 }
 
 #filters select {
@@ -91,11 +93,11 @@
     border: none;
     appearance: none;
     padding: 1.5vh;
-    height: 7vh;
-    border-radius: 100vh;
+    height: 6vh;
+    border-radius: 20px;
     width: 75vw;
 }
 
 body {
-    padding-bottom: 12vh;
+    padding-bottom: 10.5vh;
 }

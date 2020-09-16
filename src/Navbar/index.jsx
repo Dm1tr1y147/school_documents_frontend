@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 import "./main.css";
 
@@ -14,11 +14,11 @@ const Navbar = (props) => {
 
     const searchVariants = {
         open: {
-            width: "calc(100vw - 5vh)",
+            width: "calc(100vw - 4vh)",
             display: "block",
         },
         closed: {
-            width: "7vh",
+            width: "6vh",
             transitionEnd: {
                 display: "none",
             },
@@ -32,7 +32,7 @@ const Navbar = (props) => {
             borderTopRightRadius: 0,
         },
         closed: {
-            height: "12vh",
+            height: "10vh",
             borderTopLeftRadius: "20px",
             borderTopRightRadius: "20px",
         },
@@ -41,7 +41,7 @@ const Navbar = (props) => {
     const filtersVariants = {
         open: {
             height: "100vh",
-            padding: "2.5vh",
+            padding: "2vh",
         },
         closed: {
             height: 0,
@@ -62,9 +62,9 @@ const Navbar = (props) => {
             animate={filtersCollapsed ? "closed" : "open"}
         >
             <nav>
-                <a href="#">
+                <Link to="/">
                     <img id="logo" src={LogoImage} alt="Логотип ЮФМЛ" />
-                </a>
+                </Link>
 
                 <div id="spacing"></div>
 

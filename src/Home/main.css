@@ -1,0 +1,83 @@
+.classContainer {
+    padding: 2vh;
+    padding-top: calc(20px + 2vh);
+    margin-top: -20px;
+    position: relative;
+}
+
+.subjectContainer {
+    z-index: 11;
+    position: relative;
+    margin-bottom: max(1.5vh, 20px);
+}
+
+.subjectContainer>h2 {
+    margin-bottom: min(10px, 0.75vh);
+}
+
+.classContainer:last-child {
+    margin-bottom: 0;
+}
+
+.curve {
+    border-radius: 0 0 20px 20px;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    height: 40px;
+    width: 100vw;
+    z-index: 1;
+    margin-left: -2vh;
+}
+
+.classContainer:nth-child(odd),
+.classContainer:nth-child(odd) .curve {
+    background-color: #f4f4f4;
+}
+
+.classContainer:nth-child(even),
+.classContainer:nth-child(even) .curve {
+    background-color: #ffffff;
+}
+
+.carousel {
+    overflow: hidden;
+    position: relative;
+    width: calc(100vw - 5vh);
+}
+
+.carouselInner {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5vh;
+}
+
+.showMore {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    /* background: linear-gradient(to right, rgba(244, 244, 244, 0) 25%, rgb(244, 244, 244) 70%); */
+    min-width: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.classContainer:nth-child(odd) .showMore {
+    background: linear-gradient(to right, rgba(244, 244, 244, 0) 25%, rgb(244, 244, 244) 70%);
+}
+
+.classContainer:nth-child(even) .showMore {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 25%, rgb(255, 255, 255) 70%);
+}
+
+
+/* .showMore:hover {
+    background-image: linear-gradient(to right, rgba(244, 244, 244, 0) 25%, rgb(244, 244, 244) 50%);
+} */
+
+.showMore a {
+    color: rgb(54, 54, 69);
+    text-decoration: none;
+}

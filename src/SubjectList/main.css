@@ -1,0 +1,7 @@
+.subjectList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    padding: 2vh;
+    align-items: stretch;
+}

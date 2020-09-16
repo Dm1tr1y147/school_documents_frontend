@@ -1,0 +1,19 @@
+.card {
+    padding: 1.5vh;
+    box-shadow: 0 1px 6px 0 rgba(255, 109, 109, .16);
+    border-radius: 0.75vh;
+    min-width: 35vw;
+    background-color: rgb(255, 109, 109);
+    color: #ffffff;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.carousel .card {
+    max-width: 50vw;
+}
+
+.card h4 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
