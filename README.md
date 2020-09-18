@@ -2,3 +2,5 @@
 Created with:
 - React
 - Framer Motion
+- React router
+- TypeScript
