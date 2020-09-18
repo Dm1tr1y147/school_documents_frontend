@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 
 import "./App.css";
 import Home from "./Home";
 import Navbar from "./Navbar";
 import SubjectList from "./SubjectList";
+import {ILoadingState} from './types'
 
 const genName = (path: string, search?: string): string => {
     if (path === "/list" && search) {
@@ -42,6 +43,8 @@ const genName = (path: string, search?: string): string => {
 function App() {
     const location = useLocation();
 
+    const [loading, setLoading] = useState<ILoadingState>({ fetching: true, error: "" });
+
     return (
         <div>
             <header id="name">
@@ -50,10 +53,10 @@ function App() {
             <Navbar />
             <Switch>
                 <Route exact path="/">
-                    <Home />
+                    <Home setLoading={setLoading} />
                 </Route>
                 <Route path="/list">
-                    <SubjectList />
+                    <SubjectList setLoading={setLoading} />
                 </Route>
                 <Route path="*">
                     <h1>404</h1>

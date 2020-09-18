@@ -8,7 +8,7 @@ import LogoImage from "./logo.png";
 import FilterIcon from "./filter.svg";
 import SearchIcon from "./search.svg";
 
-const Navbar = (props) => {
+const Navbar = () => {
     const [searchCollapsed, setSearchCollapsed] = useState(true);
     const [filtersCollapsed, setFiltersCollapsed] = useState(true);
 
@@ -105,7 +105,7 @@ const Navbar = (props) => {
                         <h2>Преподаватель</h2>
                     </label>
                     <select name="teacher" id="teacherFilter">
-                        <option defaultValue value="">
+                        <option value="">
                             -
                         </option>
                         <option value="Попов Д.А">Попов Д.А</option>
@@ -128,7 +128,7 @@ const Navbar = (props) => {
                         <h2>Тип задания</h2>
                     </label>
                     <select name="type_num" id="typeFilter">
-                        <option defaultValue value="">
+                        <option value="">
                             -
                         </option>
                         <option value="Семестровки">Семестровки</option>
@@ -141,7 +141,7 @@ const Navbar = (props) => {
                         <h2>Предмет</h2>
                     </label>
                     <select name="predmet_type" id="predmetFilter">
-                        <option defaultValue value="">
+                        <option value="">
                             -
                         </option>
                         <option value="Математика">Математика</option>
@@ -154,7 +154,7 @@ const Navbar = (props) => {
                         <h2>Класс</h2>
                     </label>
                     <select name="class_num" id="classFilter">
-                        <option defaultValue value="">
+                        <option value="">
                             -
                         </option>
                         <option value="10">10</option>

@@ -1,3 +1,7 @@
+.homeContainer {
+    min-height: calc(79.5vh + 20px);
+}
+
 .classContainer {
     padding: 2vh;
     padding-top: calc(20px + 2vh);
