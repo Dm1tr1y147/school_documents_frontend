@@ -4,6 +4,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     box-sizing: border-box;
+    outline: none;
 }
 
 *::-webkit-scrollbar {
@@ -36,4 +37,7 @@ code {
 #name h1 {
     text-align: center;
     line-height: 6vh;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

@@ -15,4 +15,12 @@ interface IData {
     card_id: number;
 }
 
-export type { ILoadingState, IData };
+interface IFilterQuery {
+    class_num: string;
+    type_num: string;
+    predmet_type: string;
+    teacher: string;
+    search: string;
+}
+
+export type { ILoadingState, IData, IFilterQuery };

@@ -1,27 +1,28 @@
-import React, { Dispatch, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import Card from "../Card";
-import { IData, ILoadingState } from "../types";
-import "./main.css";
+import Card from '../Card';
+import { IData, IFilterQuery, ILoadingState } from '../types';
+import './main.css';
 
-const Home = ({ setLoading }: {setLoading: Dispatch<ILoadingState>}) => {
+const Home = ({
+    setLoading,
+    setSearchQuery
+}: {
+    setLoading: Dispatch<SetStateAction<ILoadingState>>;
+    setSearchQuery: Dispatch<SetStateAction<IFilterQuery>>;
+}) => {
     const [data, setData] = useState<IData[]>([]);
 
     useEffect(() => {
-        setLoading({ fetching: true, error: "" });
-        console.log("Loading data");
+        setLoading({ fetching: true, error: '' });
 
-        const requestURL =
-            "https://cors-anywhere.herokuapp.com/upml-bank.dmitriy.icu/api/cards";
+        const requestURL = 'https://upml-bank.dmitriy.icu/api/cards';
         fetch(requestURL)
             .then((res) => res.json())
             .then((data) => {
-                console.log("Fetched data");
-                console.log(data);
-
                 setData(data);
-                setLoading({ fetching: false, error: "" });
+                setLoading({ fetching: false, error: '' });
             })
             .catch((err) => {
                 setLoading({ fetching: false, error: err });
@@ -30,9 +31,17 @@ const Home = ({ setLoading }: {setLoading: Dispatch<ILoadingState>}) => {
     }, [setLoading]);
 
     const classes: number[] = [
-        ...Array.from(new Set(data.map((el) => parseInt(el.class_num)).sort())),
+        ...Array.from(new Set(data.map((el) => parseInt(el.class_num)).sort()))
     ];
-    const subjects: string[] = [...Array.from(new Set(data.map((el) => el.predmet_type).sort()))];
+    const subjects: string[] = [
+        ...Array.from(new Set(data.map((el) => el.predmet_type).sort()))
+    ];
+
+    const handleShowMore = (predmet_type: string, class_num: number) => {
+        setSearchQuery((prev): IFilterQuery => {
+            return { ...prev, predmet_type, class_num: class_num.toString() };
+        });
+    };
 
     return (
         <main className="homeContainer">
@@ -62,12 +71,13 @@ const Home = ({ setLoading }: {setLoading: Dispatch<ILoadingState>}) => {
                                     </div>
                                     <div className="showMore">
                                         <Link
-                                            to={
-                                                "/list?subject=" +
-                                                subject +
-                                                "?clas=" +
-                                                class_num
+                                            onClick={() =>
+                                                handleShowMore(
+                                                    subject,
+                                                    class_num
+                                                )
                                             }
+                                            to={'/list'}
                                         >
                                             Больше &rarr;
                                         </Link>
@@ -75,7 +85,7 @@ const Home = ({ setLoading }: {setLoading: Dispatch<ILoadingState>}) => {
                                 </div>
                             </div>
                         ) : (
-                            ""
+                            ''
                         )
                     )}
 

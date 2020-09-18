@@ -1,57 +1,138 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import React, {
+    ChangeEvent,
+    Dispatch,
+    SetStateAction,
+    useEffect,
+    useRef,
+    useState
+} from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
-import "./main.css";
+import './main.css';
 
-import LogoImage from "./logo.png";
-import FilterIcon from "./filter.svg";
-import SearchIcon from "./search.svg";
+import LogoImage from './logo.png';
+import FilterIcon from './filter.svg';
+import SearchIcon from './search.svg';
+import { IFilterQuery } from '../types';
+import { emptyQuery } from './utils';
+import { useFocus } from '../utils';
 
-const Navbar = () => {
+const Navbar = ({
+    setSearchQuery,
+    query
+}: {
+    setSearchQuery: Dispatch<SetStateAction<IFilterQuery>>;
+    query: IFilterQuery;
+}) => {
+    /*
+     * Hooks
+     */
+
     const [searchCollapsed, setSearchCollapsed] = useState(true);
     const [filtersCollapsed, setFiltersCollapsed] = useState(true);
+    const [localFilters, setLocalFilters] = useState<Partial<IFilterQuery>>();
+
+    const searchInput = useRef<HTMLInputElement>(null);
+
+    const setInputFocus = useFocus(searchInput);
+
+    const formRef = useRef<HTMLFormElement>(null);
+
+    useEffect(() => {
+        if (formRef.current) {
+            for (const [key, value] of Object.entries(query)) {
+                console.log(key, value);
+                if (formRef.current.elements.namedItem(key)) {
+                    (formRef.current.elements.namedItem(
+                        key
+                    ) as HTMLSelectElement).value = value;
+                }
+            }
+        }
+    }, [query]);
+
+    /*
+     * Animations
+     */
 
     const searchVariants = {
         open: {
-            width: "calc(100vw - 4vh)",
-            display: "block",
+            width: 'calc(100vw - 4vh)',
+            display: 'block'
         },
         closed: {
-            width: "6vh",
+            width: '6vh',
             transitionEnd: {
-                display: "none",
-            },
-        },
+                display: 'none'
+            }
+        }
     };
 
     const navVariants = {
         open: {
-            height: "100vh",
+            height: '100vh',
             borderTopLeftRadius: 0,
-            borderTopRightRadius: 0,
+            borderTopRightRadius: 0
         },
         closed: {
-            height: "10vh",
-            borderTopLeftRadius: "20px",
-            borderTopRightRadius: "20px",
-        },
+            height: '10vh',
+            borderTopLeftRadius: '20px',
+            borderTopRightRadius: '20px'
+        }
     };
 
     const filtersVariants = {
         open: {
-            height: "100vh",
-            padding: "2vh",
+            height: '100vh',
+            padding: '2vh'
         },
         closed: {
             height: 0,
-            padding: 0,
-        },
+            padding: 0
+        }
     };
 
     const transition = {
-        ease: "easeIn",
-        duration: 0.5,
+        ease: 'easeIn',
+        duration: 0.5
+    };
+
+    /*
+     * Input handlers
+     */
+
+    const handleFiltersButton = () => {
+        if (!filtersCollapsed) {
+            setSearchQuery((prev) => {
+                return { ...prev, ...localFilters };
+            });
+        }
+        setFiltersCollapsed((prev) => !prev);
+    };
+
+    const handleSelectChange = ({
+        target: element
+    }: ChangeEvent<HTMLSelectElement>) => {
+        setLocalFilters((prev) => {
+            return { ...prev, [element.name]: element.value };
+        });
+    };
+
+    const handleSearchButton = () => {
+        if (searchCollapsed) {
+            setSearchCollapsed(false);
+            setInputFocus();
+        } else if (searchInput && searchInput.current) {
+            const value = searchInput.current.value;
+
+            setSearchQuery((prev) => {
+                return { ...prev, search: value };
+            });
+            setSearchCollapsed(true);
+
+            searchInput.current.value = '';
+        }
     };
 
     return (
@@ -59,10 +140,15 @@ const Navbar = () => {
             id="navbar"
             variants={navVariants}
             transition={transition}
-            animate={filtersCollapsed ? "closed" : "open"}
+            animate={filtersCollapsed ? 'closed' : 'open'}
         >
             <nav>
-                <Link to="/">
+                <Link
+                    to="/"
+                    onClick={() => {
+                        emptyQuery(setSearchQuery);
+                    }}
+                >
                     <img id="logo" src={LogoImage} alt="Логотип ЮФМЛ" />
                 </Link>
 
@@ -71,7 +157,7 @@ const Navbar = () => {
                 <button
                     className="navButton"
                     id="filter"
-                    onClick={() => setFiltersCollapsed((prev) => !prev)}
+                    onClick={handleFiltersButton}
                 >
                     <img src={FilterIcon} alt="Фильтр" />
                 </button>
@@ -79,16 +165,17 @@ const Navbar = () => {
                 <button
                     className="navButton"
                     id="search"
-                    onClick={() => setSearchCollapsed((prev) => !prev)}
+                    onClick={handleSearchButton}
                 >
                     <img src={SearchIcon} alt="Поиск" />
                 </button>
                 <motion.input
-                    type="search"
-                    animate={searchCollapsed ? "closed" : "open"}
+                    animate={searchCollapsed ? 'closed' : 'open'}
                     variants={searchVariants}
                     transition={transition}
                     aria-label="Поиск"
+                    ref={searchInput}
+                    type="search"
                     name="search"
                     id="searchInput"
                 />
@@ -97,17 +184,20 @@ const Navbar = () => {
             <motion.form
                 variants={filtersVariants}
                 transition={transition}
-                animate={filtersCollapsed ? "closed" : "open"}
+                animate={filtersCollapsed ? 'closed' : 'open'}
                 id="filters"
+                ref={formRef}
             >
                 <div>
                     <label htmlFor="teacherFilter">
                         <h2>Преподаватель</h2>
                     </label>
-                    <select name="teacher" id="teacherFilter">
-                        <option value="">
-                            -
-                        </option>
+                    <select
+                        name="teacher"
+                        onChange={handleSelectChange}
+                        id="teacherFilter"
+                    >
+                        <option value="">-</option>
                         <option value="Попов Д.А">Попов Д.А</option>
                         <option value="Ильин А.Б">Ильин А.Б</option>
                         <option value="Пачин И.М">Пачин И.М</option>
@@ -127,10 +217,12 @@ const Navbar = () => {
                     <label htmlFor="typeFilter">
                         <h2>Тип задания</h2>
                     </label>
-                    <select name="type_num" id="typeFilter">
-                        <option value="">
-                            -
-                        </option>
+                    <select
+                        name="type_num"
+                        onChange={handleSelectChange}
+                        id="typeFilter"
+                    >
+                        <option value="">-</option>
                         <option value="Семестровки">Семестровки</option>
                         <option value="Семинары">Семинары</option>
                         <option value="Потоковые">Потоковые</option>
@@ -140,10 +232,12 @@ const Navbar = () => {
                     <label htmlFor="predmetFilter">
                         <h2>Предмет</h2>
                     </label>
-                    <select name="predmet_type" id="predmetFilter">
-                        <option value="">
-                            -
-                        </option>
+                    <select
+                        name="predmet_type"
+                        onChange={handleSelectChange}
+                        id="predmetFilter"
+                    >
+                        <option value="">-</option>
                         <option value="Математика">Математика</option>
                         <option value="Физика">Физика</option>
                         <option value="Информатика">Информатика</option>
@@ -153,10 +247,12 @@ const Navbar = () => {
                     <label htmlFor="classFilter">
                         <h2>Класс</h2>
                     </label>
-                    <select name="class_num" id="classFilter">
-                        <option value="">
-                            -
-                        </option>
+                    <select
+                        name="class_num"
+                        onChange={handleSelectChange}
+                        id="classFilter"
+                    >
+                        <option value="">-</option>
                         <option value="10">10</option>
                         <option value="11">11</option>
                     </select>
