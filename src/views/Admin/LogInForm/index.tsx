@@ -1,8 +1,10 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import { ILoadingState } from '../../../types';
 import { handleFormSubmit } from '../../../utils';
 import { handleSuccessfulLogin } from './handlers';
+import './main.css';
 
 type props = {
     setLoading: Dispatch<SetStateAction<ILoadingState>>;
@@ -16,14 +18,17 @@ const LogInForm: React.FC<props> = ({ setLoading, token, setToken }) => {
     useEffect(() => {
         setLoading({ fetching: false, error: '' });
         if (token) {
-            historyPush('/u');
+            historyPush('/a/u');
         }
     }, [setLoading, historyPush, token]);
 
     return (
         <form
+            id="logIn"
             onSubmit={(e) =>
-                handleFormSubmit(e, 'api/login', (res: Response) => handleSuccessfulLogin(res, setToken))
+                handleFormSubmit(e, 'api/login', (res: Response) =>
+                    handleSuccessfulLogin(res, setToken)
+                )
             }
         >
             <label htmlFor="">Имя пользователя</label>

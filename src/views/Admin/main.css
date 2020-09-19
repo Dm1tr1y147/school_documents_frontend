@@ -1,0 +1,52 @@
+#admin {
+    min-height: calc(79.5vh + 20px);
+    height: 100%;
+}
+
+#admin nav {
+    background-color: white;
+    padding: 2vh;
+    padding-top: calc(20px + 0.75vh);
+    margin-top: -20px;
+    border-radius: 0 0 20px 20px;
+    height: 16vmax;
+    position: relative;
+}
+
+#admin nav ul {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#admin nav li {
+    list-style-type: none;
+}
+
+#admin nav li a {
+    color: rgb(255, 109, 109);
+    border-bottom: 1px solid rgb(255, 109, 109);
+}
+
+#admin nav li a,
+#admin nav #logSwitch a {
+    text-decoration: none;
+}
+
+#admin nav #logSwitch {
+    position: absolute;
+    background-color: rgb(255, 109, 109);
+    border: none;
+    padding: 1.5vh;
+    height: 6vh;
+    border-radius: 20px;
+    font-size: 2.5vh;
+    right: 2vh;
+    top: calc((16vmax + 20px - 6vh) / 2);
+}
+
+#admin nav #logSwitch a {
+    color: white;
+}

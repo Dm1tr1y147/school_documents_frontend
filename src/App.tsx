@@ -9,8 +9,7 @@ import { queryIsEmpty } from './components/navigation/Navbar/utils';
 import SubjectList from './views/SubjectList';
 import { ILoadingState, IFilterQuery } from './types';
 import NothingFound from './views/NothingFound';
-import UploadForm from './views/Admin/UploadForm';
-import LogInForm from './views/Admin/LogInForm';
+import Admin from './views/Admin';
 
 const useDidUpdate: typeof useEffect = (func, dependencies) => {
     const didMountRef = useRef(false);
@@ -72,15 +71,8 @@ const App = () => {
                         setLoading={setLoading}
                     />
                 </Route>
-                <Route path="/u">
-                    <UploadForm setLoading={setLoading} token={token} setToken={setToken} />
-                </Route>
-                <Route path="/l">
-                    <LogInForm
-                        setLoading={setLoading}
-                        token={token}
-                        setToken={setToken}
-                    />
+                <Route path="/a">
+                    <Admin token={token} setToken={setToken} setLoading={setLoading} />
                 </Route>
                 <Route path="*">
                     <NothingFound setLoading={setLoading} />

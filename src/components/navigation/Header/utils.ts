@@ -9,11 +9,11 @@ const genName = (
         return error.toString();
     }
 
-    if (path === '/u') {
+    if (path === '/a/u') {
         return 'Upload form';
     }
 
-    if (path === '/l') {
+    if (path === '/a/l') {
         return 'login';
     }
 

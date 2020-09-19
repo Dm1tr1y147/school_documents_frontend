@@ -1,0 +1,28 @@
+#uploadForm {
+    padding: 2vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#uploadForm>input,
+#uploadForm>select,
+#uploadForm>aside {
+    height: 6vh;
+    border: none;
+    border-radius: 1000px;
+    box-sizing: border-box;
+    padding: 0 2vh;
+    appearance: none;
+    width: 100%;
+    background-color: white;
+    margin: 1vh 0;
+    color: inherit;
+}
+
+#uploadForm aside {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#uploadFrom input[type='file'] {}
