@@ -1,4 +1,4 @@
-import { IFilterQuery } from '../types';
+import { IFilterQuery } from '../../../types';
 
 const genName = (
     searchQuery: IFilterQuery,
@@ -8,6 +8,15 @@ const genName = (
     if (error) {
         return error.toString();
     }
+
+    if (path === '/u') {
+        return 'Upload form';
+    }
+
+    if (path === '/l') {
+        return 'login';
+    }
+
     if (path === '/list' && searchQuery) {
         let result = '';
 

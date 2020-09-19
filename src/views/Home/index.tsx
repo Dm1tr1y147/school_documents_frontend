@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Card from '../Card';
+import Card from '../../components/lists/Card';
 import NothingFound from '../NothingFound';
-import { IData, IFilterQuery, ILoadingState } from '../types';
+import { IData, IFilterQuery, ILoadingState } from '../../types';
 import { handleShowMore } from './handlers';
 import './main.css';
 

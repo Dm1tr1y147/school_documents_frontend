@@ -1,9 +1,9 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { IData, ILoadingState, IFilterQuery } from '../types';
-import { queryIsEmpty } from '../Navbar/utils';
-import Card from '../Card';
+import { IData, ILoadingState, IFilterQuery } from '../../types';
+import { queryIsEmpty } from '../../components/navigation/Navbar/utils';
+import Card from '../../components/lists/Card';
 import './main.css';
 import NothingFound from '../NothingFound';
 

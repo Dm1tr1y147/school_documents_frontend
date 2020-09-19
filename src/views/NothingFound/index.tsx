@@ -2,7 +2,7 @@ import React, { useEffect, Dispatch, SetStateAction } from 'react';
 
 import './main.css';
 import icon from './icon.svg';
-import { ILoadingState } from '../types';
+import { ILoadingState } from '../../types';
 
 type props = {
     setLoading?: Dispatch<SetStateAction<ILoadingState>>;
