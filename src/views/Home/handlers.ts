@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { IFilterQuery } from '../types';
+import { IFilterQuery } from '../../types';
 
 const handleShowMore = (
     predmet_type: string,

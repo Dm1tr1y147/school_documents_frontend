@@ -1,5 +1,5 @@
 import { Dispatch, RefObject, SetStateAction } from 'react';
-import { IFilterQuery } from '../types';
+import { IFilterQuery } from '../../../types';
 
 const handleFiltersButton = (
     filtersCollapsed: boolean,

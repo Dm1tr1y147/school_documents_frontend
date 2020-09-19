@@ -2,13 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
 import './App.css';
-import Header from './Header';
-import Home from './Home';
-import Navbar from './Navbar';
-import { queryIsEmpty } from './Navbar/utils';
-import SubjectList from './SubjectList';
+import Header from './components/navigation/Header';
+import Home from './views/Home';
+import Navbar from './components/navigation/Navbar';
+import { queryIsEmpty } from './components/navigation/Navbar/utils';
+import SubjectList from './views/SubjectList';
 import { ILoadingState, IFilterQuery } from './types';
-import NothingFound from './NothingFound';
+import NothingFound from './views/NothingFound';
+import UploadForm from './views/Admin/UploadForm';
+import LogInForm from './views/Admin/LogInForm';
 
 const useDidUpdate: typeof useEffect = (func, dependencies) => {
     const didMountRef = useRef(false);
@@ -27,6 +29,8 @@ const useDidUpdate: typeof useEffect = (func, dependencies) => {
 
 const App = () => {
     const history = useHistory();
+
+    const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
 
     const [loading, setLoading] = useState<ILoadingState>({
         fetching: true,
@@ -49,7 +53,11 @@ const App = () => {
 
     return (
         <>
-            <Header query={searchQuery} loading={loading} setSearchQuery={setSearchQuery} />
+            <Header
+                query={searchQuery}
+                loading={loading}
+                setSearchQuery={setSearchQuery}
+            />
             <Navbar query={searchQuery} setSearchQuery={setSearchQuery} />
             <Switch>
                 <Route exact path="/">
@@ -62,6 +70,16 @@ const App = () => {
                     <SubjectList
                         searchQuery={searchQuery}
                         setLoading={setLoading}
+                    />
+                </Route>
+                <Route path="/u">
+                    <UploadForm setLoading={setLoading} token={token} setToken={setToken} />
+                </Route>
+                <Route path="/l">
+                    <LogInForm
+                        setLoading={setLoading}
+                        token={token}
+                        setToken={setToken}
                     />
                 </Route>
                 <Route path="*">

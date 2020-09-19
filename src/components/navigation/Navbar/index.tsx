@@ -10,8 +10,8 @@ import { motion } from 'framer-motion';
 import './main.css';
 import FilterIcon from './filter.svg';
 import SearchIcon from './search.svg';
-import { IFilterQuery } from '../types';
-import { useFocus } from '../utils';
+import { IFilterQuery } from '../../../types';
+import { useFocus } from '../../../utils';
 import Logotype from '../Logotype';
 import {
     filtersVariants,
