@@ -7,16 +7,13 @@ import React, {
     useState
 } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
 import './main.css';
-
-import LogoImage from './logo.png';
 import FilterIcon from './filter.svg';
 import SearchIcon from './search.svg';
 import { IFilterQuery } from '../types';
-import { emptyQuery } from './utils';
 import { useFocus } from '../utils';
+import Logotype from '../Logotype';
 
 const Navbar = ({
     setSearchQuery,
@@ -42,7 +39,6 @@ const Navbar = ({
     useEffect(() => {
         if (formRef.current) {
             for (const [key, value] of Object.entries(query)) {
-                console.log(key, value);
                 if (formRef.current.elements.namedItem(key)) {
                     (formRef.current.elements.namedItem(
                         key
@@ -143,14 +139,7 @@ const Navbar = ({
             animate={filtersCollapsed ? 'closed' : 'open'}
         >
             <nav>
-                <Link
-                    to="/"
-                    onClick={() => {
-                        emptyQuery(setSearchQuery);
-                    }}
-                >
-                    <img id="logo" src={LogoImage} alt="Логотип ЮФМЛ" />
-                </Link>
+                <Logotype setSearchQuery={setSearchQuery} />
 
                 <div id="spacing"></div>
 
@@ -175,6 +164,11 @@ const Navbar = ({
                     transition={transition}
                     aria-label="Поиск"
                     ref={searchInput}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            handleSearchButton();
+                        }
+                    }}
                     type="search"
                     name="search"
                     id="searchInput"

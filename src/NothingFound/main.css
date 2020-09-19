@@ -1,0 +1,13 @@
+#nothingFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 75vh;
+    text-align: center;
+    margin-top: -1vh;
+}
+
+#nothingFound img {
+    max-width: 40vmin;
+    margin: 0 auto;
+}

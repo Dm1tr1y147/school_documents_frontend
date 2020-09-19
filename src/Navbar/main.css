@@ -20,15 +20,6 @@
     z-index: 1000;
 }
 
-#logo {
-    height: 6vh;
-    width: 6vh;
-    background-color: white;
-    border-radius: 100%;
-    padding: 1vh;
-    box-sizing: border-box;
-}
-
 #spacing {
     flex-grow: 1;
 }

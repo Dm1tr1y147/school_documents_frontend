@@ -1,25 +1,26 @@
-import React, { useEffect, useState, Dispatch } from 'react';
+import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { IData, ILoadingState, IFilterQuery } from '../types';
 import { queryIsEmpty } from '../Navbar/utils';
 import Card from '../Card';
 import './main.css';
+import NothingFound from '../NothingFound';
 
 const SubjectList = ({
     setLoading,
     searchQuery
 }: {
-    setLoading: Dispatch<ILoadingState>;
+    setLoading: Dispatch<SetStateAction<ILoadingState>>;
     searchQuery: IFilterQuery;
 }) => {
     const [data, setData] = useState<IData[]>([]);
 
-    const history = useHistory();
+    const { push: historyPush } = useHistory();
 
     useEffect(() => {
         if (queryIsEmpty(searchQuery)) {
-            history.push('/');
+            historyPush('/');
             return;
         }
 
@@ -28,22 +29,27 @@ const SubjectList = ({
             'https://upml-bank.dmitriy.icu/api/cards?' +
             new URLSearchParams({ ...searchQuery }).toString();
         fetch(fetchURL)
-            .then((res) => res.json())
+            .then((res) => {
+                if (!res.ok) throw res.statusText;
+                return res.json();
+            })
             .then((data) => {
                 setData(data);
                 setLoading({ fetching: false, error: '' });
             })
             .catch((err) => {
-                console.error(err);
                 setLoading({ fetching: false, error: err });
+                console.log(err);
             });
-    }, [setLoading, searchQuery]);
+    }, [setLoading, searchQuery, historyPush]);
 
     return (
         <main className="subjectList">
-            {data.map((el, index) => (
-                <Card key={index} data={el} />
-            ))}
+            {data.length ? (
+                data.map((el, index) => <Card key={index} data={el} />)
+            ) : (
+                <NothingFound />
+            )}
         </main>
     );
 };

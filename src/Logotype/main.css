@@ -1,0 +1,21 @@
+#logo {
+    height: 6vh;
+    width: 6vh;
+    background-color: white;
+    border-radius: 100%;
+    padding: 1vh;
+    box-sizing: border-box;
+}
+
+#loadingLogo #logo {
+    height: calc(75vw - 2vh);
+    width: calc(75vw - 2vh);
+    padding: 0;
+}
+
+@media (orientation: landscape) {
+    #loadingLogo #logo {
+        width: 48vh;
+        height: 48vh;
+    }
+}

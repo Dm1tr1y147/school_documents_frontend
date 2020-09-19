@@ -2,41 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
 import './App.css';
+import Header from './Header';
 import Home from './Home';
 import Navbar from './Navbar';
 import { queryIsEmpty } from './Navbar/utils';
 import SubjectList from './SubjectList';
 import { ILoadingState, IFilterQuery } from './types';
-
-const genName = (searchQuery: IFilterQuery, path: string): string => {
-    if (path === '/list' && searchQuery) {
-        let result = '';
-
-        if (searchQuery.class_num) {
-            result = result + searchQuery.class_num + ' класс';
-        }
-
-        if (searchQuery.predmet_type) {
-            result = result + ' ' + searchQuery.predmet_type;
-        }
-
-        if (searchQuery.teacher) {
-            result = result + ' ' + searchQuery.teacher;
-        }
-
-        if (searchQuery.search) {
-            result = result + ' поиск по "' + searchQuery.search + '"';
-        }
-
-        return result;
-    }
-
-    if (path === '/') {
-        return 'Банк семинаров';
-    }
-
-    return '';
-};
+import NothingFound from './NothingFound';
 
 const useDidUpdate: typeof useEffect = (func, dependencies) => {
     const didMountRef = useRef(false);
@@ -76,10 +48,8 @@ const App = () => {
     }, [searchQuery]);
 
     return (
-        <div>
-            <header id="name">
-                <h1>{genName(searchQuery, history.location.pathname)}</h1>
-            </header>
+        <>
+            <Header query={searchQuery} loading={loading} setSearchQuery={setSearchQuery} />
             <Navbar query={searchQuery} setSearchQuery={setSearchQuery} />
             <Switch>
                 <Route exact path="/">
@@ -95,10 +65,10 @@ const App = () => {
                     />
                 </Route>
                 <Route path="*">
-                    <h1>404</h1>
+                    <NothingFound setLoading={setLoading} />
                 </Route>
             </Switch>
-        </div>
+        </>
     );
 };
 

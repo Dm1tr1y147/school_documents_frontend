@@ -1,0 +1,40 @@
+#name {
+    background-color: rgb(54, 54, 69);
+    padding: 2vh;
+    color: #ffffff;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    position: relative;
+    z-index: 10;
+    height: 10vh;
+    overflow: hidden;
+}
+
+#name h1 {
+    text-align: center;
+    line-height: 6vh;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#loadingLogo {
+    position: absolute;
+    width: 75vw;
+    height: 75vw;
+    left: 13.5vw;
+    top: calc((100vh - 75vw) / 2);
+    z-index: 1000;
+    background-color: white;
+    border-radius: 100%;
+    padding: 1vh;
+}
+
+@media (orientation: landscape) {
+    #loadingLogo {
+        top: 25vh;
+        left: calc((100vw - 50vh) / 2);
+        width: 50vh;
+        height: 50vh;
+    }
+}

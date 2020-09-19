@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Card from '../Card';
+import NothingFound from '../NothingFound';
 import { IData, IFilterQuery, ILoadingState } from '../types';
 import './main.css';
 
@@ -38,60 +39,75 @@ const Home = ({
     ];
 
     const handleShowMore = (predmet_type: string, class_num: number) => {
-        setSearchQuery((prev): IFilterQuery => {
-            return { ...prev, predmet_type, class_num: class_num.toString() };
-        });
+        setSearchQuery(
+            (prev): IFilterQuery => {
+                return {
+                    ...prev,
+                    predmet_type,
+                    class_num: class_num.toString()
+                };
+            }
+        );
     };
 
     return (
         <main className="homeContainer">
-            {classes.map((class_num, index) => (
-                <div key={index} className="classContainer">
-                    <h1>{class_num} класс</h1>
-                    {subjects.map((subject, jndex) =>
-                        data.filter(
-                            (el) =>
-                                parseInt(el.class_num) === class_num &&
-                                el.predmet_type === subject
-                        ).length ? (
-                            <div key={jndex} className="subjectContainer">
-                                <h2>{subject}</h2>
-                                <div className="carousel">
-                                    <div className="carouselInner">
-                                        {data
-                                            .filter(
-                                                (el) =>
-                                                    parseInt(el.class_num) ===
-                                                        class_num &&
-                                                    el.predmet_type === subject
-                                            )
-                                            .map((el, kndex) => (
-                                                <Card key={kndex} data={el} />
-                                            ))}
-                                    </div>
-                                    <div className="showMore">
-                                        <Link
-                                            onClick={() =>
-                                                handleShowMore(
-                                                    subject,
-                                                    class_num
+            {classes.length ? (
+                classes.map((class_num, index) => (
+                    <div key={index} className="classContainer">
+                        <h1>{class_num} класс</h1>
+                        {subjects.map((subject, jndex) =>
+                            data.filter(
+                                (el) =>
+                                    parseInt(el.class_num) === class_num &&
+                                    el.predmet_type === subject
+                            ).length ? (
+                                <div key={jndex} className="subjectContainer">
+                                    <h2>{subject}</h2>
+                                    <div className="carousel">
+                                        <div className="carouselInner">
+                                            {data
+                                                .filter(
+                                                    (el) =>
+                                                        parseInt(
+                                                            el.class_num
+                                                        ) === class_num &&
+                                                        el.predmet_type ===
+                                                            subject
                                                 )
-                                            }
-                                            to={'/list'}
-                                        >
-                                            Больше &rarr;
-                                        </Link>
+                                                .map((el, kndex) => (
+                                                    <Card
+                                                        key={kndex}
+                                                        data={el}
+                                                    />
+                                                ))}
+                                        </div>
+                                        <div className="showMore">
+                                            <Link
+                                                onClick={() =>
+                                                    handleShowMore(
+                                                        subject,
+                                                        class_num
+                                                    )
+                                                }
+                                                to={'/list'}
+                                            >
+                                                Больше &rarr;
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ) : (
-                            ''
-                        )
-                    )}
+                            ) : (
+                                ''
+                            )
+                        )}
 
-                    <div className="curve"></div>
-                </div>
-            ))}
+                        <div className="curve"></div>
+                    </div>
+                ))
+            ) : (
+                <NothingFound />
+            )}
         </main>
     );
 };

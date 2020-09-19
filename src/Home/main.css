@@ -7,6 +7,7 @@
     padding-top: calc(20px + 2vh);
     margin-top: -20px;
     position: relative;
+    overflow: visible;
 }
 
 .subjectContainer {
@@ -69,11 +70,11 @@
 }
 
 .classContainer:nth-child(odd) .showMore {
-    background: linear-gradient(to right, rgba(244, 244, 244, 0) 25%, rgb(244, 244, 244) 70%);
+    background: linear-gradient( to right, rgba(244, 244, 244, 0) 25%, rgb(244, 244, 244) 70%);
 }
 
 .classContainer:nth-child(even) .showMore {
-    background: linear-gradient(to right, rgba(255, 255, 255, 0) 25%, rgb(255, 255, 255) 70%);
+    background: linear-gradient( to right, rgba(255, 255, 255, 0) 25%, rgb(255, 255, 255) 70%);
 }
 
 
@@ -84,4 +85,14 @@
 .showMore a {
     color: rgb(54, 54, 69);
     text-decoration: none;
+}
+
+@media (orientation: landscape) {
+    .classContainer {
+        padding-left: 20vw;
+        padding-right: 20vw;
+    }
+    .classContainer .curve {
+        left: 2vh;
+    }
 }

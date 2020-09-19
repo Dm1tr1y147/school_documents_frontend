@@ -5,3 +5,9 @@
     padding: 2vh;
     align-items: stretch;
 }
+
+@media (orientation: landscape) {
+    .subjectList {
+        padding: 2vh 20vw;
+    }
+}

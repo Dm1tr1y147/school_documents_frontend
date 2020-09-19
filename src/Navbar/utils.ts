@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { IFilterQuery } from '../types';
 
 const queryIsEmpty = (q: IFilterQuery): boolean => {
-    for (const [_, value] of Object.entries(q)) {
+    for (const value of Object.values(q)) {
         if (value) {
             return false;
         }
