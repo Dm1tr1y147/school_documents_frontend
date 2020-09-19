@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import Card from '../Card';
 import NothingFound from '../NothingFound';
 import { IData, IFilterQuery, ILoadingState } from '../types';
+import { handleShowMore } from './handlers';
 import './main.css';
 
-const Home = ({
-    setLoading,
-    setSearchQuery
-}: {
+type props = {
     setLoading: Dispatch<SetStateAction<ILoadingState>>;
     setSearchQuery: Dispatch<SetStateAction<IFilterQuery>>;
-}) => {
+};
+
+const Home: React.FC<props> = ({ setLoading, setSearchQuery }) => {
     const [data, setData] = useState<IData[]>([]);
 
     useEffect(() => {
@@ -37,18 +37,6 @@ const Home = ({
     const subjects: string[] = [
         ...Array.from(new Set(data.map((el) => el.predmet_type).sort()))
     ];
-
-    const handleShowMore = (predmet_type: string, class_num: number) => {
-        setSearchQuery(
-            (prev): IFilterQuery => {
-                return {
-                    ...prev,
-                    predmet_type,
-                    class_num: class_num.toString()
-                };
-            }
-        );
-    };
 
     return (
         <main className="homeContainer">
@@ -87,7 +75,8 @@ const Home = ({
                                                 onClick={() =>
                                                     handleShowMore(
                                                         subject,
-                                                        class_num
+                                                        class_num,
+                                                        setSearchQuery
                                                     )
                                                 }
                                                 to={'/list'}

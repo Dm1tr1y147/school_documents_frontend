@@ -3,7 +3,11 @@ import { IData } from '../types';
 
 import './main.css';
 
-const Card = ({ data }: { data: IData }) => (
+type props = {
+    data: IData;
+};
+
+const Card: React.FC<props> = ({ data }) => (
     <a
         className="card"
         href={'/' + data.image.slice(data.image.indexOf('media'))}

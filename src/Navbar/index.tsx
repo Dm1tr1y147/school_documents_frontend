@@ -1,5 +1,4 @@
 import React, {
-    ChangeEvent,
     Dispatch,
     SetStateAction,
     useEffect,
@@ -14,25 +13,31 @@ import SearchIcon from './search.svg';
 import { IFilterQuery } from '../types';
 import { useFocus } from '../utils';
 import Logotype from '../Logotype';
+import {
+    filtersVariants,
+    navVariants,
+    searchVariants,
+    transition
+} from './animations';
+import {
+    handleFiltersButton,
+    handleSearchButton,
+    handleSelectChange
+} from './handlers';
 
-const Navbar = ({
-    setSearchQuery,
-    query
-}: {
+type props = {
     setSearchQuery: Dispatch<SetStateAction<IFilterQuery>>;
     query: IFilterQuery;
-}) => {
-    /*
-     * Hooks
-     */
+};
 
+const Navbar: React.FC<props> = ({ setSearchQuery, query }) => {
     const [searchCollapsed, setSearchCollapsed] = useState(true);
     const [filtersCollapsed, setFiltersCollapsed] = useState(true);
-    const [localFilters, setLocalFilters] = useState<Partial<IFilterQuery>>();
+    const [localFilters, setLocalFilters] = useState<Partial<IFilterQuery>>({});
 
-    const searchInput = useRef<HTMLInputElement>(null);
+    const searchInputRef = useRef<HTMLInputElement>(null);
 
-    const setInputFocus = useFocus(searchInput);
+    const setInputFocus = useFocus(searchInputRef);
 
     const formRef = useRef<HTMLFormElement>(null);
 
@@ -47,89 +52,6 @@ const Navbar = ({
             }
         }
     }, [query]);
-
-    /*
-     * Animations
-     */
-
-    const searchVariants = {
-        open: {
-            width: 'calc(100vw - 4vh)',
-            display: 'block'
-        },
-        closed: {
-            width: '6vh',
-            transitionEnd: {
-                display: 'none'
-            }
-        }
-    };
-
-    const navVariants = {
-        open: {
-            height: '100vh',
-            borderTopLeftRadius: 0,
-            borderTopRightRadius: 0
-        },
-        closed: {
-            height: '10vh',
-            borderTopLeftRadius: '20px',
-            borderTopRightRadius: '20px'
-        }
-    };
-
-    const filtersVariants = {
-        open: {
-            height: '100vh',
-            padding: '2vh'
-        },
-        closed: {
-            height: 0,
-            padding: 0
-        }
-    };
-
-    const transition = {
-        ease: 'easeIn',
-        duration: 0.5
-    };
-
-    /*
-     * Input handlers
-     */
-
-    const handleFiltersButton = () => {
-        if (!filtersCollapsed) {
-            setSearchQuery((prev) => {
-                return { ...prev, ...localFilters };
-            });
-        }
-        setFiltersCollapsed((prev) => !prev);
-    };
-
-    const handleSelectChange = ({
-        target: element
-    }: ChangeEvent<HTMLSelectElement>) => {
-        setLocalFilters((prev) => {
-            return { ...prev, [element.name]: element.value };
-        });
-    };
-
-    const handleSearchButton = () => {
-        if (searchCollapsed) {
-            setSearchCollapsed(false);
-            setInputFocus();
-        } else if (searchInput && searchInput.current) {
-            const value = searchInput.current.value;
-
-            setSearchQuery((prev) => {
-                return { ...prev, search: value };
-            });
-            setSearchCollapsed(true);
-
-            searchInput.current.value = '';
-        }
-    };
 
     return (
         <motion.header
@@ -146,7 +68,14 @@ const Navbar = ({
                 <button
                     className="navButton"
                     id="filter"
-                    onClick={handleFiltersButton}
+                    onClick={() =>
+                        handleFiltersButton(
+                            filtersCollapsed,
+                            localFilters,
+                            setSearchQuery,
+                            setFiltersCollapsed
+                        )
+                    }
                 >
                     <img src={FilterIcon} alt="Фильтр" />
                 </button>
@@ -154,7 +83,15 @@ const Navbar = ({
                 <button
                     className="navButton"
                     id="search"
-                    onClick={handleSearchButton}
+                    onClick={() =>
+                        handleSearchButton(
+                            searchCollapsed,
+                            setSearchCollapsed,
+                            setInputFocus,
+                            searchInputRef,
+                            setSearchQuery
+                        )
+                    }
                 >
                     <img src={SearchIcon} alt="Поиск" />
                 </button>
@@ -163,10 +100,16 @@ const Navbar = ({
                     variants={searchVariants}
                     transition={transition}
                     aria-label="Поиск"
-                    ref={searchInput}
+                    ref={searchInputRef}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter') {
-                            handleSearchButton();
+                            handleSearchButton(
+                                searchCollapsed,
+                                setSearchCollapsed,
+                                setInputFocus,
+                                searchInputRef,
+                                setSearchQuery
+                            );
                         }
                     }}
                     type="search"
@@ -188,7 +131,9 @@ const Navbar = ({
                     </label>
                     <select
                         name="teacher"
-                        onChange={handleSelectChange}
+                        onChange={(e) =>
+                            handleSelectChange(e.target, setLocalFilters)
+                        }
                         id="teacherFilter"
                     >
                         <option value="">-</option>
@@ -213,7 +158,9 @@ const Navbar = ({
                     </label>
                     <select
                         name="type_num"
-                        onChange={handleSelectChange}
+                        onChange={(e) =>
+                            handleSelectChange(e.target, setLocalFilters)
+                        }
                         id="typeFilter"
                     >
                         <option value="">-</option>
@@ -228,7 +175,9 @@ const Navbar = ({
                     </label>
                     <select
                         name="predmet_type"
-                        onChange={handleSelectChange}
+                        onChange={(e) =>
+                            handleSelectChange(e.target, setLocalFilters)
+                        }
                         id="predmetFilter"
                     >
                         <option value="">-</option>
@@ -243,7 +192,9 @@ const Navbar = ({
                     </label>
                     <select
                         name="class_num"
-                        onChange={handleSelectChange}
+                        onChange={(e) =>
+                            handleSelectChange(e.target, setLocalFilters)
+                        }
                         id="classFilter"
                     >
                         <option value="">-</option>

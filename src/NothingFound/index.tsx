@@ -4,11 +4,11 @@ import './main.css';
 import icon from './icon.svg';
 import { ILoadingState } from '../types';
 
-const NothingFound = ({
-    setLoading
-}: {
+type props = {
     setLoading?: Dispatch<SetStateAction<ILoadingState>>;
-}) => {
+};
+
+const NothingFound: React.FC<props> = ({ setLoading }) => {
     useEffect(() => {
         if (!setLoading) return;
 

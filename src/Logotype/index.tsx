@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { emptyQuery } from '../Navbar/utils';
 import { IFilterQuery } from '../types';
 import LogoImage from './logo.png';
-import './main.css'
+import './main.css';
 
-const Logotype = ({
-    setSearchQuery
-}: {
+type props = {
     setSearchQuery: Dispatch<SetStateAction<IFilterQuery>>;
-}) => {
+};
+
+const Logotype: React.FC<props> = ({ setSearchQuery }) => {
     return (
         <Link
             to="/"

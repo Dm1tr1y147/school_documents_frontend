@@ -7,13 +7,12 @@ import Card from '../Card';
 import './main.css';
 import NothingFound from '../NothingFound';
 
-const SubjectList = ({
-    setLoading,
-    searchQuery
-}: {
+type props = {
     setLoading: Dispatch<SetStateAction<ILoadingState>>;
     searchQuery: IFilterQuery;
-}) => {
+};
+
+const SubjectList: React.FC<props> = ({ setLoading, searchQuery }) => {
     const [data, setData] = useState<IData[]>([]);
 
     const { push: historyPush } = useHistory();
