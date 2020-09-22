@@ -1,0 +1,36 @@
+#deleteList {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2vh;
+    padding: 2vh;
+    align-content: start;
+}
+
+.deleteCard {
+    background-color: rgb(255, 109, 109);
+    color: white;
+    padding: 1.5vh;
+    border-radius: 5px;
+    position: relative;
+}
+
+.deleteCard * {
+    padding: 0.2vh 0;
+}
+
+.deleteCard button {
+    position: absolute;
+    top: 1.5vh;
+    right: 1.5vh;
+    height: 2.5h;
+    width: 2.5vh;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media (orientation: landscape) {
+    #deleteList {
+        grid-template-columns: 1fr 1fr;
+    }
+}

@@ -1,8 +1,10 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { ILoadingState } from '../../../types';
-import { handleFormSubmit } from '../../../utils';
+import { handleFormSubmit } from '../utils';
+import { IErrorStatus } from '../types';
+import { handleLoginError } from '../UploadForm/handlers';
 import { handleSuccessfulLogin } from './handlers';
 import './main.css';
 
@@ -15,6 +17,10 @@ type props = {
 const LogInForm: React.FC<props> = ({ setLoading, token, setToken }) => {
     const { push: historyPush } = useHistory();
 
+    const [errorStatus, setErrorStatus] = useState<IErrorStatus>({
+        successful: true
+    });
+
     useEffect(() => {
         setLoading({ fetching: false, error: '' });
         if (token) {
@@ -26,8 +32,12 @@ const LogInForm: React.FC<props> = ({ setLoading, token, setToken }) => {
         <form
             id="logIn"
             onSubmit={(e) =>
-                handleFormSubmit(e, 'api/login', (res: Response) =>
-                    handleSuccessfulLogin(res, setToken)
+                handleFormSubmit(
+                    e,
+                    'api/login',
+                    (err) => handleLoginError(err, setErrorStatus),
+                    (res: Response) => handleSuccessfulLogin(res, setToken),
+                    { 'Access-Control-Allow-Origin': '*' }
                 )
             }
         >
@@ -38,6 +48,7 @@ const LogInForm: React.FC<props> = ({ setLoading, token, setToken }) => {
             <input type="password" name="password" />
 
             <input type="submit" value="Вход" />
+            {!errorStatus.successful ? <p>{errorStatus.errorMessage}</p> : ''}
         </form>
     );
 };

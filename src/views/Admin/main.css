@@ -1,6 +1,5 @@
 #admin {
-    min-height: calc(79.5vh + 20px);
-    height: 100%;
+    min-height: 80vh;
 }
 
 #admin nav {
@@ -23,11 +22,17 @@
 
 #admin nav li {
     list-style-type: none;
+    font-size: 2.3vh;
 }
 
 #admin nav li a {
     color: rgb(255, 109, 109);
-    border-bottom: 1px solid rgb(255, 109, 109);
+    border-bottom: 2px solid rgb(255, 109, 109);
+}
+
+#admin nav li.current a {
+    color: rgb(54, 54, 69);
+    border-bottom: none;
 }
 
 #admin nav li a,
@@ -39,8 +44,8 @@
     position: absolute;
     background-color: rgb(255, 109, 109);
     border: none;
-    padding: 1.5vh;
-    height: 6vh;
+    padding: 0 1.5vh;
+    line-height: 6vh;
     border-radius: 20px;
     font-size: 2.5vh;
     right: 2vh;
@@ -49,4 +54,45 @@
 
 #admin nav #logSwitch a {
     color: white;
+}
+
+@media (orientation: landscape) {
+    #admin {
+        display: grid;
+        height: 80vh;
+        grid-template-columns: 1fr 5fr;
+    }
+    #admin nav {
+        height: calc(80vh + 40px);
+    }
+    #admin nav ul {
+        justify-content: start;
+        gap: 1.5vh;
+        margin-top: 1.25vh;
+        padding: 1.5vh 0;
+    }
+    #admin nav ul li {
+        background-color: rgb(255, 109, 109);
+        padding: 1.5vh;
+        border-radius: 20px;
+    }
+    #admin nav ul li.current {
+        background-color: rgb(54, 54, 69);
+    }
+    #admin nav ul li a {
+        color: white;
+    }
+    #admin nav ul li.current a {
+        color: white;
+    }
+    #admin nav #logSwitch {
+        top: initial;
+        right: initial;
+        left: 2vh;
+        bottom: calc(20px + 2vh);
+    }
+    #admin>* {
+        height: 80vh;
+        overflow-y: scroll;
+    }
 }

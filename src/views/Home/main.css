@@ -1,5 +1,5 @@
 .homeContainer {
-    min-height: calc(79.5vh + 20px);
+    min-height: calc(80vh + 20px);
 }
 
 .classContainer {
@@ -7,7 +7,7 @@
     padding-top: calc(20px + 2vh);
     margin-top: -20px;
     position: relative;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .subjectContainer {

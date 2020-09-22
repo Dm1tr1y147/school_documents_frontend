@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import Select from '../../../components/uploadForm/Select';
 import { ILoadingState } from '../../../types';
-import { handleFormSubmit } from '../../../utils';
+import { handleFormSubmit } from '../utils';
 import selectOptions from './selectOptions.json';
 import './main.css';
 
@@ -26,8 +26,8 @@ const UploadForm: React.FC<props> = ({ setLoading, token, setToken }) => {
         <form
             id="uploadForm"
             onSubmit={(e) =>
-                handleFormSubmit(e, 'api/card/create', undefined, {
-                    Authorization: `Token ${localStorage.token}`
+                handleFormSubmit(e, 'api/card/create', () => {}, undefined, {
+                    'Authorization': `Token ${localStorage.token}`
                 })
             }
         >

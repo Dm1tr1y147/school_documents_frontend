@@ -1,3 +1,6 @@
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { IData, ILoadingState } from './types';
+
 const useFocus = (focusRef: React.RefObject<HTMLInputElement>) => {
     const setFocus = () => {
         setTimeout(() => {
@@ -8,27 +11,42 @@ const useFocus = (focusRef: React.RefObject<HTMLInputElement>) => {
     return setFocus;
 };
 
-const handleFormSubmit = (
-    e: React.FormEvent<HTMLFormElement>,
-    uri: string,
-    callBack?: (res: Response) => void,
-    headers?: Headers | string[][] | Record<string, string> | undefined
-) => {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
+const useDidUpdate: typeof useEffect = (func, dependencies) => {
+    const didMountRef = useRef(false);
 
-    const options: RequestInit = {
-        method: 'POST',
-        body: data,
-        headers: headers
-    };
+    useEffect(() => {
+        if (didMountRef.current) {
+            func();
+        } else {
+            didMountRef.current = true;
+        }
 
-    fetch('https://upml-bank.dmitriy.icu/' + uri, options)
-        .then((res) => {
-            if (!res.ok) throw res.statusText;
-            if (callBack) callBack(res);
-        })
-        .catch((err) => console.log(err));
+        return () => {};
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, dependencies);
 };
 
-export { useFocus, handleFormSubmit };
+const fetchCardList = (
+    setData: Dispatch<SetStateAction<IData[]>>,
+    setLoading?: Dispatch<SetStateAction<ILoadingState>>
+) => {
+    if (setLoading) setLoading({ fetching: true, error: '' });
+
+    const requestURL = 'https://upml-bank.dmitriy.icu/api/cards';
+
+    fetch(requestURL)
+        .then((res) => {
+            if (!res.ok) throw res.statusText;
+            return res.json();
+        })
+        .then((data) => {
+            setData(data);
+            if (setLoading) setLoading({ fetching: false, error: '' });
+        })
+        .catch((err) => {
+            if (setLoading) setLoading({ fetching: false, error: err });
+            console.error(err);
+        });
+};
+
+export { useFocus, useDidUpdate, fetchCardList };

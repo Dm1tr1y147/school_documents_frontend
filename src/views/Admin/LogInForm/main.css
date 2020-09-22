@@ -8,6 +8,10 @@
     padding-top: 5vh;
 }
 
+#logIn label {
+    font-size: 2.5vh;
+}
+
 #logIn input {
     height: 6vh;
     border: none;
@@ -16,6 +20,7 @@
     padding: 0 2vh;
     width: 100%;
     margin: 1vh 0;
+    font-size: 2.5vh;
 }
 
 #logIn input[type='submit'] {

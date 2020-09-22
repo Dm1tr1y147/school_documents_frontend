@@ -4,6 +4,10 @@
     flex-direction: column;
 }
 
+#uploadForm>label {
+    font-size: 2.5vh;
+}
+
 #uploadForm>input,
 #uploadForm>select,
 #uploadForm>aside {
@@ -16,6 +20,7 @@
     width: 100%;
     background-color: white;
     margin: 1vh 0;
+    font-size: 2.5vh;
     color: inherit;
 }
 
@@ -25,4 +30,7 @@
     justify-content: center;
 }
 
-#uploadFrom input[type='file'] {}
+#uploadForm input[type='submit'] {
+    background-color: rgb(255, 109, 109);
+    color: white;
+}

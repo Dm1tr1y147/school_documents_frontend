@@ -6,6 +6,7 @@ import NothingFound from '../NothingFound';
 import { IData, IFilterQuery, ILoadingState } from '../../types';
 import { handleShowMore } from './handlers';
 import './main.css';
+import { fetchCardList } from '../../utils';
 
 type props = {
     setLoading: Dispatch<SetStateAction<ILoadingState>>;
@@ -15,21 +16,7 @@ type props = {
 const Home: React.FC<props> = ({ setLoading, setSearchQuery }) => {
     const [data, setData] = useState<IData[]>([]);
 
-    useEffect(() => {
-        setLoading({ fetching: true, error: '' });
-
-        const requestURL = 'https://upml-bank.dmitriy.icu/api/cards';
-        fetch(requestURL)
-            .then((res) => res.json())
-            .then((data) => {
-                setData(data);
-                setLoading({ fetching: false, error: '' });
-            })
-            .catch((err) => {
-                setLoading({ fetching: false, error: err });
-                console.error(err);
-            });
-    }, [setLoading]);
+    useEffect(() => fetchCardList(setData, setLoading), [setLoading]);
 
     const classes: number[] = [
         ...Array.from(new Set(data.map((el) => parseInt(el.class_num)).sort()))

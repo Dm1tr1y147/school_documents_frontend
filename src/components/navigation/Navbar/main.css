@@ -74,6 +74,12 @@
     z-index: 1;
 }
 
+.centerContent {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 #filters label h2 {
     margin: 1.5vh 0;
     text-align: left;
@@ -92,5 +98,5 @@
 }
 
 body {
-    padding-bottom: 10.5vh;
+    padding-bottom: 10vh;
 }

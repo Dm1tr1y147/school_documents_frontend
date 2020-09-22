@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 
 import './App.css';
@@ -10,26 +10,14 @@ import SubjectList from './views/SubjectList';
 import { ILoadingState, IFilterQuery } from './types';
 import NothingFound from './views/NothingFound';
 import Admin from './views/Admin';
-
-const useDidUpdate: typeof useEffect = (func, dependencies) => {
-    const didMountRef = useRef(false);
-
-    useEffect(() => {
-        if (didMountRef.current) {
-            func();
-        } else {
-            didMountRef.current = true;
-        }
-
-        return () => {};
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, dependencies);
-};
+import { useDidUpdate } from './utils';
 
 const App = () => {
     const history = useHistory();
 
-    const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
+    const [token, setToken] = useState<string | null>(
+        localStorage.getItem('token')
+    );
 
     const [loading, setLoading] = useState<ILoadingState>({
         fetching: true,
@@ -72,7 +60,11 @@ const App = () => {
                     />
                 </Route>
                 <Route path="/a">
-                    <Admin token={token} setToken={setToken} setLoading={setLoading} />
+                    <Admin
+                        token={token}
+                        setToken={setToken}
+                        setLoading={setLoading}
+                    />
                 </Route>
                 <Route path="*">
                     <NothingFound setLoading={setLoading} />

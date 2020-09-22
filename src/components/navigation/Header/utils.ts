@@ -10,18 +10,26 @@ const genName = (
     }
 
     if (path === '/a/u') {
-        return 'Upload form';
+        return 'Загрузить';
     }
 
     if (path === '/a/l') {
-        return 'login';
+        return 'Вход';
+    }
+
+    if (path === '/a/r') {
+        return 'Удалить';
     }
 
     if (path === '/list' && searchQuery) {
         let result = '';
 
+        if (searchQuery.type_num) {
+            result = result + searchQuery.type_num;
+        }
+
         if (searchQuery.class_num) {
-            result = result + searchQuery.class_num + ' класс';
+            result = result + ' ' + searchQuery.class_num + ' класс';
         }
 
         if (searchQuery.predmet_type) {

@@ -125,7 +125,7 @@ const Navbar: React.FC<props> = ({ setSearchQuery, query }) => {
                 id="filters"
                 ref={formRef}
             >
-                <div>
+                <div className='centerContent'>
                     <label htmlFor="teacherFilter">
                         <h2>Преподаватель</h2>
                     </label>
@@ -152,7 +152,7 @@ const Navbar: React.FC<props> = ({ setSearchQuery, query }) => {
                         <option value="Конкина Н.В">Конкина Н.В</option>
                     </select>
                 </div>
-                <div>
+                <div className='centerContent'>
                     <label htmlFor="typeFilter">
                         <h2>Тип задания</h2>
                     </label>
@@ -169,7 +169,7 @@ const Navbar: React.FC<props> = ({ setSearchQuery, query }) => {
                         <option value="Потоковые">Потоковые</option>
                     </select>
                 </div>
-                <div>
+                <div className='centerContent'>
                     <label htmlFor="predmetFilter">
                         <h2>Предмет</h2>
                     </label>
@@ -186,7 +186,7 @@ const Navbar: React.FC<props> = ({ setSearchQuery, query }) => {
                         <option value="Информатика">Информатика</option>
                     </select>
                 </div>
-                <div>
+                <div className='centerContent'>
                     <label htmlFor="classFilter">
                         <h2>Класс</h2>
                     </label>
