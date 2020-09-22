@@ -1,19 +1,18 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Select from '../../../components/uploadForm/Select';
-import { ILoadingState } from '../../../types';
-import { handleFormSubmit } from '../utils';
+import Select from 'components/Form/Select';
+import { ILoadingState } from 'types';
+import { handleFormSubmit } from 'views/Admin/utils';
 import selectOptions from './selectOptions.json';
 import './main.css';
 
 type props = {
     setLoading: Dispatch<SetStateAction<ILoadingState>>;
     token: string | null;
-    setToken: Dispatch<SetStateAction<string | null>>;
 };
 
-const UploadForm: React.FC<props> = ({ setLoading, token, setToken }) => {
+const UploadForm: React.FC<props> = ({ setLoading, token }) => {
     const { push: historyPush } = useHistory();
 
     useEffect(() => {

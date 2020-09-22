@@ -67,7 +67,6 @@ const Admin: React.FC<props> = ({ token, setToken, setLoading }) => {
                     <UploadForm
                         setLoading={setLoading}
                         token={token}
-                        setToken={setToken}
                     />
                 </Route>
                 <Route path={`${path}/l`}>

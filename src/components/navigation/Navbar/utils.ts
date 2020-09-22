@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { IFilterQuery } from '../../../types';
+import { IFilterQuery } from 'types';
 
 const queryIsEmpty = (q: IFilterQuery): boolean => {
     for (const value of Object.values(q)) {

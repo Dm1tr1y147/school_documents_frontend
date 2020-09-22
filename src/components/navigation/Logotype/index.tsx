@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
 
-import { emptyQuery } from '../Navbar/utils';
-import { IFilterQuery } from '../../../types';
+import { emptyQuery } from 'components/navigation/Navbar/utils';
+import { IFilterQuery } from 'types';
 import LogoImage from './logo.png';
 import './main.css';
 

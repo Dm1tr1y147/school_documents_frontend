@@ -1,10 +1,10 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { ILoadingState } from '../../../types';
-import { handleFormSubmit } from '../utils';
-import { IErrorStatus } from '../types';
-import { handleLoginError } from '../UploadForm/handlers';
+import { ILoadingState } from 'types';
+import { handleFormSubmit } from 'views/Admin/utils';
+import { IErrorStatus } from 'views/Admin/types';
+import { handleLoginError } from 'views/Admin/handlers';
 import { handleSuccessfulLogin } from './handlers';
 import './main.css';
 

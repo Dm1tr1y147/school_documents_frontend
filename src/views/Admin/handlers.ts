@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { IErrorStatus } from '../types';
+import { IErrorStatus } from './types';
 
 const handleLoginError = (
     err: ErrorEvent,

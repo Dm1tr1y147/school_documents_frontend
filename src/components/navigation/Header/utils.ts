@@ -1,4 +1,4 @@
-import { IFilterQuery } from '../../../types';
+import { IFilterQuery } from 'types';
 
 const genName = (
     searchQuery: IFilterQuery,

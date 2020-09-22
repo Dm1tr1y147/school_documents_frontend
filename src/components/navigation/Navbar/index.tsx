@@ -10,9 +10,9 @@ import { motion } from 'framer-motion';
 import './main.css';
 import FilterIcon from './filter.svg';
 import SearchIcon from './search.svg';
-import { IFilterQuery } from '../../../types';
-import { useFocus } from '../../../utils';
-import Logotype from '../Logotype';
+import { IFilterQuery } from 'types';
+import { useFocus } from 'utils';
+import Logotype from 'components/navigation/Logotype';
 import {
     filtersVariants,
     navVariants,

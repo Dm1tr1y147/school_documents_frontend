@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 
-import { IFilterQuery, ILoadingState } from '../../../types';
+import { IFilterQuery, ILoadingState } from 'types';
 import './main.css';
 import Logotype from '../Logotype';
 import { genName } from './utils';
