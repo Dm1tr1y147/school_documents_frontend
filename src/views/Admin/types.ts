@@ -1,5 +1,5 @@
 interface IErrorStatus {
-    successful: boolean;
+    successful?: boolean;
     errorMessage?: string;
 }
 

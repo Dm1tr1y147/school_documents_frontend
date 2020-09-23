@@ -17,9 +17,7 @@ type props = {
 const UploadForm: React.FC<props> = ({ setLoading, token }) => {
     const { push: historyPush } = useHistory();
 
-    const [errorStatus, setErrorStatus] = useState<IErrorStatus>({
-        successful: true
-    });
+    const [errorStatus, setErrorStatus] = useState<IErrorStatus>({});
 
     useEffect(() => {
         if (!token) {
@@ -31,7 +29,7 @@ const UploadForm: React.FC<props> = ({ setLoading, token }) => {
         <form
             id="uploadForm"
             onSubmit={(e) => {
-                setErrorStatus({ successful: true });
+                setErrorStatus({});
                 handleFormSubmit(
                     e,
                     'api/card/create',
@@ -75,7 +73,9 @@ const UploadForm: React.FC<props> = ({ setLoading, token }) => {
                 <input type="file" name="image" id="image" />
             </aside>
 
-            {!errorStatus.successful ? (
+            {errorStatus.successful ? (
+                <p className="successText">Успешно загружено</p>
+            ) : errorStatus.successful === false ? (
                 <p className="errorText">{errorStatus.errorMessage}</p>
             ) : (
                 ''
