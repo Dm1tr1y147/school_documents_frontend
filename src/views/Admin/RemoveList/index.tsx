@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { IData, ILoadingState } from '../../../types';
 import { fetchCardList } from '../../../utils';
@@ -15,6 +16,14 @@ type props = {
 const RemoveList: React.FC<props> = ({ setLoading, token, setToken }) => {
     const [data, setData] = useState<IData[]>([]);
     useEffect(() => fetchCardList(setData), []);
+
+    const { push: historyPush } = useHistory();
+
+    useEffect(() => {
+        if (!token) {
+            historyPush('/a/l');
+        }
+    }, [setLoading, historyPush, token]);
 
     return (
         <div id="deleteList">
