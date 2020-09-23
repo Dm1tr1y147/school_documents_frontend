@@ -27,6 +27,7 @@ const RemoveList: React.FC<props> = ({ setLoading, token, setToken }) => {
                     <button
                         onClick={async () => {
                             await removeItem(el.slug, token!);
+                            fetchCardList(setData);
                         }}
                     >
                         <img src={removeIcon} alt="удалить" />

@@ -4,7 +4,7 @@ const removeItem = async (slug: string, token: string) => {
             `https://upml-bank.dmitriy.icu/api/card/${slug}/delete`,
             {
                 method: 'delete',
-                headers: { Authentification: `Token ${token}` }
+                headers: { Authorization: `Token ${token}` }
             }
         );
         if (!res.ok) throw res.statusText;

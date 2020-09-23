@@ -1,15 +1,15 @@
 import { Dispatch, SetStateAction } from 'react';
 import { IErrorStatus } from './types';
 
-const handleLoginError = (
-    err: ErrorEvent,
+const handleError = (
+    err: string,
     setErrorStatus: Dispatch<SetStateAction<IErrorStatus>>
 ) => {
     console.log(err);
     setErrorStatus({
         successful: false,
-        errorMessage: err.toString()
+        errorMessage: 'Ошибка'
     });
 };
 
-export { handleLoginError };
+export { handleError };

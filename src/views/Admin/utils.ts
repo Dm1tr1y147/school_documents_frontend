@@ -22,4 +22,4 @@ const handleFormSubmit = (
         .catch((err) => errorHandler(err));
 };
 
-export {handleFormSubmit}
+export { handleFormSubmit };
