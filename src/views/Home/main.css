@@ -48,7 +48,7 @@
 .carousel {
     overflow: hidden;
     position: relative;
-    width: calc(100vw - 5vh);
+    width: 100%;
 }
 
 .carouselInner {
